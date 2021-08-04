@@ -15,7 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from twitteruser_app.views import index, tweeter, follow, unfollow, tweeter_view
+from auth_app.views import signup_view, login_view, logout_view
+from tweet_app.views import index, tweet_form, tweet_detail, public_tweet
+from notification_app.views import notifications
 
 urlpatterns = [
+    path('', index, name='home'),
+    path('login/', login_view),
+    path('logout/', logout_view),
+    path('signup/', signup_view),
+    path('public/', public_tweet),
+    path('tweet/<int:post_id>/public/', public_tweet, name="public_tweet"),
+    path('profile/<str:username>/public/', tweeter_view, name="public"),
+    path('profile/<str:username>/', tweeter, name="profile"),
+    path('tweetform/', tweet_form),
+    path('tweet/<int:post_id>/', tweet_detail, name="tweet"),
+    path('follow/<int:tweeter_id>', follow),
+    path('unfollow/<int:tweeter_id>', unfollow),
+    path('notifications/', notifications),
     path('admin/', admin.site.urls),
 ]

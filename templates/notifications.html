@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<ul>
+    {% for notify in notification %}
+    <li>Sent by: @{{ notify.msg_content.tweeter }} </br>Message: {{ notify.msg_content }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

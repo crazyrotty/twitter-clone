@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<br>
+<br>
+<h1>{{ request.user.username }}!</h>
+<img class="mb-4" src="/static/images/download (3).png" alt="post pictures" width="72" height="57">
+    <h2>A member since: {{ request.user.joined_date }}</h2>
+    <h4>Notifications: {{ pings.count }}</h4>
+    <hr>
+    <div>
+        {% for post in post_list %}
+        {% if post.tweeter in request.user.follows.all or post.tweeter == request.user %}
+        <ul>
+            <h3>{{ post.body }}</h3>
+            <h4>{{ post.post_time }}</h4>
+            <a href="/tweet/{{ post.id }}/">See Post</a>
+            <br>
+            <h5>Tweeted by</h5>
+            <li><a href="/profile/{{ post.tweeter.username }}/">@{{post.tweeter.username }}</a></li>
+        </ul>
+                <hr>
+        {% endif %}
+        {% endfor %}
+        </div>
+        {% endblock %}

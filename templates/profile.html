@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<div>
+
+<h2>{{ tweeter.username }}</h2>
+<img class="mb-4" src="/static/images/download (3).png" alt="" width="72" height="57">
+<p>Bio: {{ tweeter.bio }}</p>
+<i>Tweeting since: {{ tweeter.joined_date }}</i>
+<p>Notifications: {{ pings.count }}</p>
+<h4>Follows: {{ tweeter.follows.count }}</h4>
+</div>
+<div>
+<button><a href="/unfollow/{{tweeter.id}}">Unfollow</a></button>
+<button><a href="/follow/{{tweeter.id}}">Follow</a></button>
+</div>
+</br>
+<hr>
+<div>
+<h4>Tweets: {{post_list.count}}</h4>
+<ul>
+    {% for post in post_list %}
+    <ol>
+        <a href="/tweet/{{ post.id }}">{{ post.body }} -- {{ post.post_time }}</a>
+    </ol>
+    {% endfor %}
+</ul>
+<hr>
+</div>
+{% endblock %}
